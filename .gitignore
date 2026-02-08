@@ -1,0 +1,22 @@
+node_modules/
+
+# Build artifacts (dist/ is intentionally NOT ignored — GitHub Actions needs it committed)
+*.tsbuildinfo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor directories
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Environment / secrets
+.env
+.env.*
+
+# Logs
+*.log
+npm-debug.log*

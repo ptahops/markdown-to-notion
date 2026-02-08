@@ -1,0 +1,45 @@
+name: 'Markdown to Notion Sync'
+description: 'Sync Markdown documentation files to Notion pages, preserving folder hierarchy'
+author: 'eichemberger'
+
+branding:
+  icon: 'upload-cloud'
+  color: 'blue'
+
+inputs:
+  notion-token:
+    description: 'Notion integration token (secret)'
+    required: true
+  notion-parent-page-id:
+    description: 'Root Notion page ID where docs will be synced under'
+    required: true
+  docs-dir:
+    description: 'Path to the docs directory relative to the repository root'
+    required: false
+    default: 'docs'
+  sync-mode:
+    description: 'Sync mode: "changed" (only git-diffed files + new) or "all"'
+    required: false
+    default: 'changed'
+  git-before:
+    description: 'Git ref before the push (used in "changed" mode). Typically github.event.before'
+    required: false
+    default: ''
+  git-after:
+    description: 'Git ref after the push (used in "changed" mode). Typically github.event.after'
+    required: false
+    default: ''
+  concurrency:
+    description: 'Max concurrent Notion API calls (to avoid rate limits)'
+    required: false
+    default: '3'
+
+outputs:
+  synced-files:
+    description: 'JSON array of synced file relative paths'
+  synced-count:
+    description: 'Number of files synced'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
